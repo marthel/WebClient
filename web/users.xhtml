@@ -1,0 +1,27 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+        <h:form  rendered="#{userBean.authenticated}" id="userSearchForm">
+            <h:outputLabel value="Search for users:"/><br/>
+            <h:inputText id="username" value="#{userBean.searchTerm}">
+                <f:ajax event="keyup" render="users"/>
+            </h:inputText><br/><br/>
+            <div style="padding:7px;height: 300px; overflow-y: scroll;" id="u">
+                <h:panelGroup id="users">
+
+                        <ui:repeat value="#{userBean.users}" var="user">
+                            <span style="float: left"> #{user.username}</span>
+                            <span style="float: right">
+                                <h:commandButton value="Follow" action="#{followBean.addFollow(user)}">
+                                    <f:ajax execute="@form" render=":userSearchForm:users :followingSearchForm:followings"/>
+                                </h:commandButton>
+                            </span>
+                            <br/><br/>
+                        </ui:repeat>
+
+                </h:panelGroup>
+            </div>
+        </h:form>
+</ui:composition>

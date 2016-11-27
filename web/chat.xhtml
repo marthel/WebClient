@@ -1,0 +1,28 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:form  rendered="#{userBean.authenticated}" id="chatForm">
+        <h:outputLabel value="Chat"/><br/>
+        <div style="padding:4px; height:450px; position:relative;" id="u">
+            <hr/>
+            <h:panelGroup id="chat">
+                <div style="height:333px; overflow-y: scroll;">
+                   <ui:repeat value="#{chatBean.chatMessages}" var="message">
+                       #{message.sender.username} (#{message.sendDate}): #{message.message}<br/>
+                    </ui:repeat>
+                </div>
+                <span style=" position: absolute; width: 99%; bottom:10px;">
+                    <hr style="width: 100%;"/>
+                    <h:inputTextarea style=" width:75%; height: 75px; display: inline-block;" id="msg" value="#{chatBean.chat.message}"/>
+                </span>
+                <span style="position: absolute; bottom:15px; left:80%;">
+                    <h:commandButton style="height: 75px; width: 100px;" value="send" action="#{chatBean.sendMessage}">
+                        <f:ajax execute="@form" render=":chatForm:chat"/>
+                    </h:commandButton>
+                </span>
+            </h:panelGroup>
+        </div>
+    </h:form>
+</ui:composition>

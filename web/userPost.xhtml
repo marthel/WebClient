@@ -1,0 +1,31 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+        <h:form rendered="#{userBean.authenticated}" id="createPost">
+            <h:outputLabel value="Create a new post"/><br/><br/>
+            <h:inputTextarea style="width: 79%;height: 120px; margin: auto; display: block;" id="body" value="#{postBean.post.body}">
+                <f:ajax event="keyup" render="length"/>
+            </h:inputTextarea>
+            <br />
+            <h:outputLabel style="position:relative;left: 13%" id="length" value="#{postBean.charsLeft}"/>
+            <h:commandButton style="position:relative;left: 57%" value="Post">
+                <f:ajax execute="createPost" render="yourPosts" listener="#{postBean.createPost}"/>
+            </h:commandButton>
+
+            <br/><br/>
+            <hr/>
+            <br/><br/>
+            <h:panelGroup rendered="#{userBean.authenticated}" id="yourPosts">
+                <h:outputLabel value="Your posts"/><br/>
+                <ui:repeat value="#{postBean.yourPosts}" var="post">
+                    <div style=" margin:auto;border:1px solid; padding: 10px; width: 79%;height: 120px;">
+                        #{post.user.username}: <br/>
+                        #{post.body}<br/><br/>
+                        date: #{post.creationDate}
+                    </div><br/><br/>
+                </ui:repeat>
+            </h:panelGroup>
+        </h:form>
+ </ui:composition>
