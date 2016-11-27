@@ -50,6 +50,10 @@ public class FollowBean implements Serializable{
         client.setPath("/Follow/Add");
         ClientResponse response = client.post(new Gson().toJson(this.follow));
     }
+    public void unFollow(FollowViewModel follow){
+        client.setPath("/Follow/Remove");
+        ClientResponse response = client.post(new Gson().toJson(follow));
+    }
     public List<FollowViewModel> getFollows(UserViewModel user){
         if(searchTerm.length()<1) {
             client.setPath("/Follow/Following/" + user.getUserId());

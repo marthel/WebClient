@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class FollowViewModel implements Serializable {
 
+    private int followId;
     private UserViewModel follower;
     private UserViewModel following;
 
@@ -21,5 +22,13 @@ public class FollowViewModel implements Serializable {
 
     public void setFollowing(UserViewModel following) {
         this.following = following;
+    }
+
+    public int getFollowId() {
+        return followId;
+    }
+
+    public void setFollowId(int followId) {
+        this.followId = followId;
     }
 }

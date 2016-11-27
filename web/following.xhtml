@@ -16,6 +16,9 @@
                         <h:commandButton value="chat" action="#{chatBean.setReceiver(follow.following)}">
                             <f:ajax execute="@form" render=":followingSearchForm:followings :chatForm:chat"/>
                         </h:commandButton>
+                        <h:commandButton value="Unfollow" action="#{followBean.unFollow(follow)}">
+                            <f:ajax execute="@form" render=":followingSearchForm:followings :userSearchForm:users"/>
+                        </h:commandButton>
                     </span>
                     <br/><br/>
                 </ui:repeat>
