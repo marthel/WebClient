@@ -15,7 +15,7 @@
                             <span style="float: left"> #{user.username}</span>
                             <span style="float: right">
                                 <h:commandButton value="Follow" action="#{followBean.addFollow(userBean.user,user)}">
-                                    <f:ajax execute="@form" render=":userSearchForm:users :followingSearchForm:followings"/>
+                                    <f:ajax execute="@form" render=":userSearchForm:users :followingSearchForm:followings :followingPostsForm:followingPosts"/>
                                 </h:commandButton>
                             </span>
                             <br/><br/>

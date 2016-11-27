@@ -2,8 +2,9 @@
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:h="http://xmlns.jcp.org/jsf/html"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-    <h:form rendered="#{userBean.authenticated}">
+    <h:form rendered="#{userBean.authenticated}" id="followingPostsForm">
         <h:outputLabel value="Following user posts"/><br/><br/>
+        <h:panelGroup id="followingPosts">
         <ui:repeat value="#{postBean.getFollowingPosts(followBean.getFollows(userBean.user))}" var="post">
             <div style=" margin:auto;border:1px solid; padding: 10px; width: 79%;height: 120px;">
                 #{post.user.username}: <br/>
@@ -11,5 +12,6 @@
                 date: #{post.creationDate}
             </div><br/><br/>
         </ui:repeat>
+        </h:panelGroup>
     </h:form>
 </ui:composition>

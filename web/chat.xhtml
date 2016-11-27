@@ -18,7 +18,7 @@
                     <h:inputTextarea style=" width:75%; height: 75px; display: inline-block;" id="msg" value="#{chatBean.chat.message}"/>
                 </span>
                 <span style="position: absolute; bottom:15px; left:80%;">
-                    <h:commandButton style="height: 75px; width: 100px;" value="send" action="#{chatBean.sendMessage}">
+                    <h:commandButton style="height: 75px; width: 100px;" value="send" action="#{chatBean.sendMessage(userBean.user)}">
                         <f:ajax execute="@form" render=":chatForm:chat"/>
                     </h:commandButton>
                 </span>
