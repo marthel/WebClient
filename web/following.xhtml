@@ -10,7 +10,7 @@
         </h:inputText><br/><br/>
         <div style="padding:7px;height: 300px; overflow-y: scroll;" id="u">
             <h:panelGroup id="followings">
-                <ui:repeat value="#{followBean.follows}" var="follow">
+                <ui:repeat value="#{followBean.getFollows(userBean.user)}" var="follow">
                     <span style="float: left"> #{follow.following.username}</span>
                     <span style="float: right">
                         <h:commandButton value="chat" action="#{chatBean.setReceiver(follow.following)}">

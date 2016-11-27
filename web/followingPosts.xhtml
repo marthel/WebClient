@@ -4,7 +4,7 @@
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:form rendered="#{userBean.authenticated}">
         <h:outputLabel value="Following user posts"/><br/><br/>
-        <ui:repeat value="#{postBean.followingPosts}" var="post">
+        <ui:repeat value="#{postBean.getFollowingPosts(followBean.getFollows(userBean.user))}" var="post">
             <div style=" margin:auto;border:1px solid; padding: 10px; width: 79%;height: 120px;">
                 #{post.user.username}: <br/>
                 #{post.body}<br/><br/>

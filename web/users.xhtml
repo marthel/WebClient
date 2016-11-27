@@ -14,7 +14,7 @@
                         <ui:repeat value="#{userBean.users}" var="user">
                             <span style="float: left"> #{user.username}</span>
                             <span style="float: right">
-                                <h:commandButton value="Follow" action="#{followBean.addFollow(user)}">
+                                <h:commandButton value="Follow" action="#{followBean.addFollow(userBean.user,user)}">
                                     <f:ajax execute="@form" render=":userSearchForm:users :followingSearchForm:followings"/>
                                 </h:commandButton>
                             </span>

@@ -8,7 +8,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.sun.jersey.api.client.ClientResponse;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import java.io.Serializable;
 import java.lang.reflect.Type;
@@ -20,24 +19,6 @@ import java.util.List;
 public class PostBean implements Serializable {
     private PostViewModel post;
     private RestClient client;
-
-    @ManagedProperty(value="#{userBean.user}")
-    private UserViewModel user;
-    public UserViewModel getUser() {
-        return user;
-    }
-    public void setUser(UserViewModel user) {
-        this.user = user;
-    }
-
-    @ManagedProperty(value="#{followBean.follows}")
-    private List<FollowViewModel> follows;
-    public List<FollowViewModel> getFollows() {
-        return follows;
-    }
-    public void setFollows(List<FollowViewModel> follows) {
-      this.follows=follows;
-    }
 
     public PostBean() {
         this.post = new PostViewModel();
@@ -52,22 +33,22 @@ public class PostBean implements Serializable {
         this.post = post;
     }
 
-    public void createPost(){
-        this.post.setUser(this.user);
+    public void createPost(UserViewModel user){
+        this.post.setUser(user);
         client.setPath("/Post/Create");
         ClientResponse response = client.post(new Gson().toJson(this.post));
     }
 
-   public List<PostViewModel> getYourPosts(){
+   public List<PostViewModel> getYourPosts(UserViewModel user){
        client.setPath("/Post/YourPosts");
-       ClientResponse response = client.post(new Gson().toJson(this.user));
+       ClientResponse response = client.post(new Gson().toJson(user));
        Type type = new TypeToken<List<PostViewModel>>() {}.getType();
        return new Gson().fromJson(response.getEntity(String.class),type);
     }
-    public List<PostViewModel> getFollowingPosts(){
+    public List<PostViewModel> getFollowingPosts(List<FollowViewModel> follows){
         client.setPath("/Post/FollowingPosts");
         Type type = new TypeToken<List<FollowViewModel>>() {}.getType();
-        ClientResponse response = client.post(new Gson().toJson(this.follows,type));
+        ClientResponse response = client.post(new Gson().toJson(follows,type));
         type = new TypeToken<List<PostViewModel>>() {}.getType();
         return new Gson().fromJson(response.getEntity(String.class),type);
     }

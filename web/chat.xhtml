@@ -9,7 +9,7 @@
             <hr/>
             <h:panelGroup id="chat">
                 <div style="height:333px; overflow-y: scroll;">
-                   <ui:repeat value="#{chatBean.chatMessages}" var="message">
+                   <ui:repeat value="#{chatBean.getChatMessages(userBean.user)}" var="message">
                        #{message.sender.username} (#{message.sendDate}): #{message.message}<br/>
                     </ui:repeat>
                 </div>

@@ -6,9 +6,6 @@ import com.sun.jersey.api.client.WebResource;
 
 import javax.ws.rs.core.MediaType;
 
-/**
- * Created by Marthin on 2016-11-27.
- */
 public class RestClient {
     private Client client;
     private final String URL = "http://localhost:8080";
@@ -28,8 +25,7 @@ public class RestClient {
     }
     public ClientResponse post(String json){
         WebResource webResource = client.resource(URL+path);
-        ClientResponse response = webResource.type(MediaType.APPLICATION_JSON).post(ClientResponse.class, json);
-        return response;
+        return webResource.type(MediaType.APPLICATION_JSON).post(ClientResponse.class, json);
     }
 
     public String getPath() {

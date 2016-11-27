@@ -2,7 +2,7 @@
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:f="http://xmlns.jcp.org/jsf/core"
         xmlns:h="http://xmlns.jcp.org/jsf/html"
-        xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core">
         <h:form rendered="#{userBean.authenticated}" id="createPost">
             <h:outputLabel value="Create a new post"/><br/><br/>
             <h:inputTextarea style="width: 79%;height: 120px; margin: auto; display: block;" id="body" value="#{postBean.post.body}">
@@ -11,7 +11,7 @@
             <br />
             <h:outputLabel style="position:relative;left: 13%" id="length" value="#{postBean.charsLeft}"/>
             <h:commandButton style="position:relative;left: 57%" value="Post">
-                <f:ajax execute="createPost" render="yourPosts" listener="#{postBean.createPost}"/>
+                <f:ajax execute="createPost" render="yourPosts" listener="#{postBean.createPost(userBean.user)}"/>
             </h:commandButton>
 
             <br/><br/>
@@ -19,7 +19,7 @@
             <br/><br/>
             <h:panelGroup rendered="#{userBean.authenticated}" id="yourPosts">
                 <h:outputLabel value="Your posts"/><br/>
-                <ui:repeat value="#{postBean.yourPosts}" var="post">
+                <ui:repeat value="#{postBean.getYourPosts(userBean.user)}" var="post">
                     <div style=" margin:auto;border:1px solid; padding: 10px; width: 79%;height: 120px;">
                         #{post.user.username}: <br/>
                         #{post.body}<br/><br/>
